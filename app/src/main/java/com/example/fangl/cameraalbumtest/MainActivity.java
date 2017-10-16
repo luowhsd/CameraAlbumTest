@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 
 public class MainActivity extends AppCompatActivity {
     public static final int TAKE_PHOTO = 1;
+    public static final int CHOOSE_PHOTO = 2;
     private ImageView imageView;
     private Uri imageUri;
     @Override
@@ -92,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 break;
+            case CHOOSE_PHOTO:
+
+                break;
             default:
         }
     }
@@ -115,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
     // 打开图片选择器
     private void openAlbum(){
-
 
 
     }
