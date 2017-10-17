@@ -1,6 +1,7 @@
 package com.example.fangl.cameraalbumtest;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -94,7 +95,16 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case CHOOSE_PHOTO:
+                if(requestCode==RESULT_OK){
 
+                    if(Build.VERSION.SDK_INT>=19){
+                        //4.4及其以上系统使用
+                        handleImageOnKitKat(data);
+                    }else{
+                        handleImageBeforeKitKat(data);
+                    }
+
+                }
                 break;
             default:
         }
@@ -102,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
         switch (requestCode){
             case 1:
                 if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
@@ -112,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
 
-
         }
 
     }
@@ -120,6 +130,18 @@ public class MainActivity extends AppCompatActivity {
     // 打开图片选择器
     private void openAlbum(){
 
+        Intent intent = new Intent("android.intent.action.GET_CONTENT");
+        intent.setType("img/*");
+        startActivityForResult(intent,CHOOSE_PHOTO);
+
+    }
+
+    @TargetApi(19)
+    private void handleImageOnKitKat(Intent data){
+
+    }
+
+    private void handleImageBeforeKitKat(Intent data){
 
     }
 
